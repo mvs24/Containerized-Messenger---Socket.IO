@@ -22,6 +22,7 @@ function App() {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           const { data } = await getMe();
           const user = {
+            _id: data.data._id,
             name: data.data.name,
             lastname: data.data.lastname,
             email: data.data.email,
