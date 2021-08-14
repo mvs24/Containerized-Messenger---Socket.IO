@@ -1,0 +1,22 @@
+.userContainer {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.userContainer img {
+  width: 30%;
+  border-radius: 100px;
+}
+
+.userContainer span {
+  margin: 10px;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}

@@ -1,0 +1,17 @@
+.input {
+  background: rgba(255, 255, 255, 0.533);
+  padding: 10px 8px;
+  color: #333;
+  outline: none;
+  text-align: left;
+  border-radius: 3px;
+  border: 1px solid #333;
+  max-width: 30rem;
+}
+.invalid {
+  background-color: rgb(219, 141, 141);
+  color: white;
+}
+.invalid::placeholder {
+  color: white;
+}

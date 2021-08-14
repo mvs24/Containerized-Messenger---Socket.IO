@@ -3,6 +3,13 @@ import http from "http";
 import { Server, Socket } from "socket.io";
 import mongoose from "mongoose";
 import userRoutes from "./routes/user";
+import followRoutes from "./routes/follow";
+import dotenv from "dotenv";
+import { globalErrorHandler } from "./controllers/error";
+
+dotenv.config({
+  path: "./config.env",
+});
 
 const app = express();
 
@@ -11,14 +18,16 @@ app.use(express.json());
 const API_ENDPOINT = "/api/v1";
 
 app.use(`${API_ENDPOINT}/users`, userRoutes);
+app.use(`${API_ENDPOINT}/followers`, followRoutes);
+
+app.use(globalErrorHandler);
 
 const handleSocketEvents = (socket: Socket) => {};
 
 const init = async () => {
   try {
     const mongoConnectionURI: string =
-      process.env.DB_CONNECTION_URI ||
-      "mongodb://host.docker.internal:27017/messenger";
+      process.env.DB_CONNECTION_URI || "mongodb://localhost:27017/messenger";
 
     await mongoose.connect(mongoConnectionURI, {
       useUnifiedTopology: true,
@@ -33,7 +42,7 @@ const init = async () => {
 
     const io = new Server(server, {
       cors: {
-        origin: "http://host.docker.internal:3000",
+        origin: "http://localhost:3000",
       },
     });
     server.listen(PORT, () => console.log(`Server started on port ${PORT}`));

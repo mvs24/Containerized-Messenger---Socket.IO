@@ -1,0 +1,17 @@
+.errorContainer {
+  background-color: rgb(226, 105, 105);
+  color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px 10px;
+  position: relative;
+  min-width: 15rem;
+}
+.errorContainer .errorIcon {
+  font-size: 1.6rem;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 3rem;
+  transform: translate(0, -50%);
+  cursor: pointer;
+}

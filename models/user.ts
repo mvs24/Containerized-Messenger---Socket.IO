@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 interface UserAttrs {
   name: string;
@@ -28,6 +29,15 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.build = function (attrs: UserAttrs): UserDocument {
   return new User(attrs);
 };
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  // @ts-ignore
+  this.password = await bcrypt.hash(this.password, 12);
+
+  next();
+});
 
 // @ts-ignore
 const User = mongoose.model<UserDocument, UserModel>("User", userSchema);
